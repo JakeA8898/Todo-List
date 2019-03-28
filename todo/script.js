@@ -8,9 +8,28 @@ function inputLength() {
 }
 
 function createListElement() {
+	var div = document.createElement("div");
 	var li = document.createElement("li");
+	var complete = document.createElement("button")
+	var del = document.createElement("button");
+	div.classList.add("list-wrapper");
+	complete.appendChild(document.createTextNode("complete"));
+	del.appendChild(document.createTextNode("Delete"));
+	li.classList.add("done")
+	li.classList.add("listElem");
+	li.classList.toggle("done");
+	complete.addEventListener("click",function(){
+		li.classList.toggle("done");
+	});
+
+	del.addEventListener("click",function(){
+		ul.removeChild(div);
+	});
 	li.appendChild(document.createTextNode(input.value));
-	ul.appendChild(li);
+	div.appendChild(complete);
+	div.appendChild(del);
+	div.appendChild(li);
+	ul.appendChild(div);
 	input.value = "";
 }
 
@@ -26,6 +45,12 @@ function addListAfterKeypress(event) {
 	}
 }
 
+function clearListAfterClick(){
+	ul.innerHTML = "";
+}
+
 button.addEventListener("click", addListAfterClick);
+
+clear.addEventListener("click", clearListAfterClick);
 
 input.addEventListener("keypress", addListAfterKeypress);

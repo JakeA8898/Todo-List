@@ -21,3 +21,16 @@
 .done {
   text-decoration: line-through;
 }
+
+ .list {
+  list-style-type: none;
+}
+
+.list-wrapper{
+  display: flex;
+  flex-direction: row;
+}
+
+.listElem{
+  padding-left: 10px;
+}
