@@ -10,21 +10,23 @@ function inputLength() {
 function createListElement() {
 	var div = document.createElement("div");
 	var li = document.createElement("li");
-	var complete = document.createElement("button")
+	var complete = document.createElement("input");
 	var del = document.createElement("button");
 	div.classList.add("list-wrapper");
-	complete.appendChild(document.createTextNode("complete"));
-	del.appendChild(document.createTextNode("Delete"));
-	li.classList.add("done")
-	li.classList.add("listElem");
-	li.classList.toggle("done");
+	complete.type = "checkbox";
 	complete.addEventListener("click",function(){
 		li.classList.toggle("done");
 	});
 
+	del.appendChild(document.createTextNode("Delete"));
 	del.addEventListener("click",function(){
 		ul.removeChild(div);
 	});
+
+	li.classList.add("done")
+	li.classList.add("listElem");
+	li.classList.toggle("done");
+
 	li.appendChild(document.createTextNode(input.value));
 	div.appendChild(complete);
 	div.appendChild(del);
@@ -32,6 +34,7 @@ function createListElement() {
 	ul.appendChild(div);
 	input.value = "";
 }
+
 
 function addListAfterClick() {
 	if (inputLength() > 0) {
