@@ -63,7 +63,7 @@ input[type='checkbox']:checked{
   background-color: blue;
 }
 
-.visible{
+.not-visible{
   visibility: hidden;
 }
 

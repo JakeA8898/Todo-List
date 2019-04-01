@@ -1,4 +1,7 @@
 var button = document.getElementById("enter");
+var allButton = document.getElementById("all");
+var completeButton = document.getElementById("complete");
+var nCompleteButton = document.getElementById("notComplete");
 var clear = document.getElementById("clear");
 var input = document.getElementById("userinput");
 var ul = document.querySelector("ul");
@@ -16,18 +19,18 @@ function createListElement() {
 	var del = document.createElement("button");
 	
 	div.classList.add("list-wrapper");
-	div.classList.add("visible");
-	div.classList.toggle("visible");
 
 	var item = {
 		thisDiv: div,
-		itemIndex: index
+		itemIndex: index,
+		complete: false
 	};
 	index++;
 
 	complete.type = "checkbox";
 	complete.addEventListener("click",function(){
 		li.classList.toggle("done");
+		item.complete = !item.complete;
 	});
 
 	del.appendChild(document.createTextNode("Delete"));
@@ -41,9 +44,7 @@ function createListElement() {
 		
 	});
 
-	li.classList.add("done")
 	li.classList.add("listElem");
-	li.classList.toggle("done");
 
 	
 
@@ -54,6 +55,33 @@ function createListElement() {
 	listItems.push(item);
 	ul.appendChild(div);
 	input.value = "";
+}
+
+
+function allToggle(){
+	listItems.forEach((item) =>{
+		item.thisDiv.classList.remove("not-visible");
+	});
+}
+
+function showComplete(){
+	listItems.forEach((item)=>{
+		if(item.complete === false){
+			item.thisDiv.classList.add("not-visible");
+		}else{
+			item.thisDiv.classList.remove("not-visible");
+		}
+	});
+}
+
+function showNotComplete(){
+	listItems.forEach((item)=>{
+		if(item.complete === true){
+			item.thisDiv.classList.add("not-visible");
+		}else{
+			item.thisDiv.classList.remove("not-visible");
+		}
+	});
 }
 
 
@@ -81,3 +109,9 @@ button.addEventListener("click", addListAfterClick);
 clear.addEventListener("click", clearListAfterClick);
 
 input.addEventListener("keypress", addListAfterKeypress);
+
+allButton.addEventListener("click", allToggle);
+
+completeButton.addEventListener("click", showComplete);
+
+nCompleteButton.addEventListener("click", showNotComplete);
